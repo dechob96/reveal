@@ -284,13 +284,13 @@
 
       const percent = Math.round((transparent / sampled) * 100);
 
-      if (percent >= 75) {
+      if (percent >= 60) {
         surpriseText.textContent = 'Almost there!';
       } else {
         surpriseText.textContent = 'Keep scratching!';
       }
 
-      if (percent >= 95) {
+      if (percent >= 90) {
         revealAll();
       }
     }
