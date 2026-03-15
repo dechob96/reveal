@@ -27,13 +27,13 @@
       color: var(--text);
       background:
         radial-gradient(circle at top left, #fff 0%, transparent 28%),
-        radial-gradient(circle at bottom right, #ffd7e4 0%, transparent 24%),
+        radial-gradient(circle at bottom right, #ffe7bf 0%, transparent 24%),
         linear-gradient(135deg, var(--bg1), var(--bg2));
       padding: 24px;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
-    .floating-hearts {
+    .floating-shapes {
       position: fixed;
       inset: 0;
       pointer-events: none;
@@ -41,18 +41,18 @@
       z-index: 0;
     }
 
-    .heart {
+    .shape {
       position: absolute;
       bottom: -40px;
       font-size: 18px;
-      opacity: 0.2;
+      opacity: 0.18;
       animation: floatUp linear infinite;
     }
 
     @keyframes floatUp {
       from { transform: translateY(0) rotate(0deg); opacity: 0; }
-      20% { opacity: 0.22; }
-      to { transform: translateY(-115vh) rotate(24deg); opacity: 0; }
+      20% { opacity: 0.18; }
+      to { transform: translateY(-115vh) rotate(18deg); opacity: 0; }
     }
 
     .wrap {
@@ -67,39 +67,15 @@
       border: 1px solid rgba(255,255,255,0.7);
       box-shadow: var(--shadow);
       border-radius: var(--radius);
-      padding: clamp(20px, 4vw, 36px);
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.7);
-      font-size: 0.9rem;
-      margin-bottom: 16px;
-    }
-
-    h1 {
-      margin: 0 0 10px;
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      line-height: 1.02;
-      letter-spacing: -0.03em;
-    }
-
-    .lead {
-      margin: 0 0 26px;
-      font-size: clamp(1rem, 2.4vw, 1.15rem);
-      color: rgba(59, 31, 43, 0.82);
+      padding: clamp(18px, 3vw, 28px);
     }
 
     .scratch-shell {
       position: relative;
       border-radius: 24px;
       overflow: hidden;
-      background: linear-gradient(135deg, #fff8fb, #fff);
-      box-shadow: inset 0 0 0 1px rgba(255, 143, 171, 0.15);
+      background: linear-gradient(135deg, #fff8ef, #fffdf9);
+      box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.12);
     }
 
     .surprise {
@@ -107,50 +83,26 @@
       display: grid;
       place-items: center;
       text-align: center;
-      padding: 30px;
+      padding: 32px;
       position: relative;
       background:
-        radial-gradient(circle at top, rgba(255, 143, 171, 0.18), transparent 30%),
-        linear-gradient(180deg, #fffdfd, #fff2f7);
+        radial-gradient(circle at top, rgba(245, 158, 11, 0.12), transparent 30%),
+        linear-gradient(180deg, #fffdfb, #fff4df);
     }
 
     .surprise-inner {
       max-width: 560px;
     }
 
-    .surprise-kicker {
-      display: inline-block;
-      margin-bottom: 14px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-
     .surprise h2 {
-      margin: 0 0 14px;
-      font-size: clamp(2rem, 4.5vw, 3rem);
-      line-height: 1.05;
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.3rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      text-wrap: balance;
     }
 
-    .surprise p {
-      margin: 0 auto;
-      font-size: clamp(1rem, 2.3vw, 1.15rem);
-      line-height: 1.7;
-      color: rgba(59, 31, 43, 0.88);
-    }
-
-    .secret-note {
-      margin-top: 20px;
-      padding: 14px 18px;
-      background: rgba(255,255,255,0.75);
-      border-radius: 18px;
-      display: inline-block;
-      box-shadow: 0 10px 24px rgba(140, 55, 85, 0.08);
-    }
-
-    canvas {
+    canvas#scratchCanvas {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -159,146 +111,39 @@
       cursor: crosshair;
     }
 
-    .overlay-label {
-      position: absolute;
+    canvas#confettiCanvas {
+      position: fixed;
       inset: 0;
-      display: grid;
-      place-items: center;
-      text-align: center;
+      width: 100vw;
+      height: 100vh;
       pointer-events: none;
-      color: white;
-      font-weight: 800;
-      font-size: clamp(1.2rem, 3vw, 1.7rem);
-      letter-spacing: 0.02em;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.18);
-      padding: 24px;
-      transition: opacity 300ms ease;
+      z-index: 3;
     }
 
-    .progress-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-top: 14px;
-      font-size: 0.95rem;
-      color: rgba(59, 31, 43, 0.72);
-    }
-
-    .progress-bar {
-      flex: 1;
-      height: 10px;
-      background: rgba(255,255,255,0.75);
-      border-radius: 999px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      width: 0%;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      transition: width 180ms ease;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    button {
-      border: 0;
-      border-radius: 999px;
-      padding: 12px 18px;
-      font: inherit;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
-    }
-
-    button:hover { transform: translateY(-1px); }
-    button:active { transform: translateY(0); }
-
-    .primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: white;
-      box-shadow: 0 14px 28px rgba(255, 79, 135, 0.28);
-    }
-
-    .secondary {
-      background: rgba(255,255,255,0.82);
-      color: var(--text);
-      box-shadow: 0 10px 22px rgba(59, 31, 43, 0.08);
-    }
-
-    .footer-note {
-      margin-top: 18px;
-      font-size: 0.9rem;
-      color: rgba(59, 31, 43, 0.62);
-    }
-
-    .revealed .overlay-label,
-    .revealed canvas {
+    .revealed #scratchCanvas {
       opacity: 0;
       pointer-events: none;
-      transition: opacity 500ms ease;
+      transition: opacity 450ms ease;
     }
 
     @media (max-width: 600px) {
-      .surprise { min-height: 330px; }
-      .progress-row { flex-direction: column; align-items: stretch; }
-      .progress-row span:last-child { text-align: right; }
+      .surprise { min-height: 320px; padding: 24px; }
     }
   </style>
 </head>
 <body>
-  <div class="floating-hearts" aria-hidden="true"></div>
+  <div class="floating-shapes" aria-hidden="true"></div>
+  <canvas id="confettiCanvas"></canvas>
 
   <main class="wrap">
     <section class="card">
-      <div class="eyebrow">✨ A special surprise is waiting</div>
-      <h1>Scratch to find out.</h1>
-      <p class="lead">
-        Use your finger or mouse to scratch the card and reveal the big news underneath.
-      </p>
-
       <div class="scratch-shell" id="scratchShell">
-        <div class="surprise" id="surpriseContent">
+        <div class="surprise">
           <div class="surprise-inner">
-            <span class="surprise-kicker">Big News</span>
-            <h2>You’re going to be an aunt! 👶</h2>
-            <p>
-              We have a very special little secret to share with you, and we couldn’t wait any longer.
-              A brand new tiny human is on the way, and that means you’re getting promoted to auntie.
-            </p>
-            <div class="secret-note">
-              We cannot wait for you to meet the little one and be part of this beautiful new chapter.
-            </div>
+            <h2>You’re going to be an aunt 👶</h2>
           </div>
         </div>
-        </div>
-
         <canvas id="scratchCanvas"></canvas>
-        <div class="overlay-label" id="overlayLabel">✨ Scratch here ✨</div>
-      </div>
-
-      <div class="progress-row">
-        <span>Reveal progress</span>
-        <div class="progress-bar" aria-hidden="true">
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
-        <span id="progressText">0%</span>
-      </div>
-
-      <div class="actions">
-        <button class="primary" id="revealBtn">Reveal all</button>
-        <button class="secondary" id="resetBtn">Reset card</button>
-      </div>
-
-      <div class="footer-note">
-        Tip: send this on mobile or desktop — the scratch effect works on both.
       </div>
     </section>
   </main>
@@ -307,15 +152,14 @@
     const shell = document.getElementById('scratchShell');
     const canvas = document.getElementById('scratchCanvas');
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
-    const progressFill = document.getElementById('progressFill');
-    const progressText = document.getElementById('progressText');
-    const revealBtn = document.getElementById('revealBtn');
-    const resetBtn = document.getElementById('resetBtn');
-    const overlayLabel = document.getElementById('overlayLabel');
+    const confettiCanvas = document.getElementById('confettiCanvas');
+    const confettiCtx = confettiCanvas.getContext('2d');
 
     let drawing = false;
     let lastPoint = null;
     let revealed = false;
+    let confettiPieces = [];
+    let confettiRunning = false;
 
     function resizeCanvas() {
       const ratio = window.devicePixelRatio || 1;
@@ -330,6 +174,16 @@
       updateProgress();
     }
 
+    function resizeConfettiCanvas() {
+      const ratio = window.devicePixelRatio || 1;
+      confettiCanvas.width = Math.floor(window.innerWidth * ratio);
+      confettiCanvas.height = Math.floor(window.innerHeight * ratio);
+      confettiCanvas.style.width = window.innerWidth + 'px';
+      confettiCanvas.style.height = window.innerHeight + 'px';
+      confettiCtx.setTransform(1, 0, 0, 1, 0, 0);
+      confettiCtx.scale(ratio, ratio);
+    }
+
     function paintCover(width, height) {
       const gradient = ctx.createLinearGradient(0, 0, width, height);
       gradient.addColorStop(0, '#fbbf24');
@@ -339,7 +193,7 @@
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
 
-      ctx.fillStyle = 'rgba(255,255,255,0.2)';
+      ctx.fillStyle = 'rgba(255,255,255,0.20)';
       for (let i = 0; i < 18; i++) {
         ctx.beginPath();
         ctx.arc(
@@ -351,11 +205,6 @@
         );
         ctx.fill();
       }
-
-      ctx.fillStyle = 'rgba(255,255,255,0.28)';
-      ctx.font = '700 20px Inter, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText('Scratch me', width / 2, height / 2 + 8);
     }
 
     function getPoint(event) {
@@ -390,7 +239,8 @@
       if (revealed) return;
       drawing = true;
       lastPoint = null;
-      scratchAt(...Object.values(getPoint(event)));
+      const { x, y } = getPoint(event);
+      scratchAt(x, y);
       updateProgress();
     }
 
@@ -416,11 +266,8 @@
       }
       const total = imageData.length / 4;
       const percent = Math.round((transparent / total) * 100);
-      progressFill.style.width = percent + '%';
-      progressText.textContent = percent + '%';
-      overlayLabel.style.opacity = Math.max(0, 1 - percent / 55).toString();
 
-      if (percent >= 55) {
+      if (percent >= 50 && !revealed) {
         revealAll();
       }
     }
@@ -428,15 +275,54 @@
     function revealAll() {
       revealed = true;
       shell.classList.add('revealed');
-      progressFill.style.width = '100%';
-      progressText.textContent = '100%';
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      launchConfetti();
     }
 
-    function resetCard() {
-      revealed = false;
-      shell.classList.remove('revealed');
-      resizeCanvas();
+    function launchConfetti() {
+      if (confettiRunning) return;
+      confettiRunning = true;
+      const colors = ['#f59e0b', '#f97316', '#fde68a', '#ffffff', '#fb923c'];
+      confettiPieces = Array.from({ length: 180 }, () => ({
+        x: Math.random() * window.innerWidth,
+        y: -20 - Math.random() * window.innerHeight * 0.4,
+        w: 6 + Math.random() * 8,
+        h: 10 + Math.random() * 12,
+        vx: -2 + Math.random() * 4,
+        vy: 2 + Math.random() * 4,
+        rotation: Math.random() * Math.PI,
+        vr: -0.2 + Math.random() * 0.4,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        life: 90 + Math.random() * 50,
+      }));
+      requestAnimationFrame(animateConfetti);
+    }
+
+    function animateConfetti() {
+      confettiCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      confettiPieces.forEach(piece => {
+        piece.x += piece.vx;
+        piece.y += piece.vy;
+        piece.rotation += piece.vr;
+        piece.vy += 0.03;
+        piece.life -= 1;
+
+        confettiCtx.save();
+        confettiCtx.translate(piece.x, piece.y);
+        confettiCtx.rotate(piece.rotation);
+        confettiCtx.fillStyle = piece.color;
+        confettiCtx.fillRect(-piece.w / 2, -piece.h / 2, piece.w, piece.h);
+        confettiCtx.restore();
+      });
+
+      confettiPieces = confettiPieces.filter(piece => piece.life > 0 && piece.y < window.innerHeight + 40);
+
+      if (confettiPieces.length > 0) {
+        requestAnimationFrame(animateConfetti);
+      } else {
+        confettiCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        confettiRunning = false;
+      }
     }
 
     canvas.addEventListener('mousedown', startScratch);
@@ -446,27 +332,29 @@
     canvas.addEventListener('touchmove', moveScratch, { passive: false });
     window.addEventListener('touchend', endScratch);
 
-    revealBtn.addEventListener('click', revealAll);
-    resetBtn.addEventListener('click', resetCard);
-    window.addEventListener('resize', resizeCanvas);
-
-    function spawnHearts() {
-      const hearts = document.querySelector('.floating-hearts');
+    function spawnShapes() {
+      const container = document.querySelector('.floating-shapes');
       const symbols = ['✨', '⭐', '🌼', '☀️'];
       for (let i = 0; i < 18; i++) {
         const el = document.createElement('div');
-        el.className = 'heart';
+        el.className = 'shape';
         el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
         el.style.left = Math.random() * 100 + '%';
         el.style.animationDuration = (8 + Math.random() * 9) + 's';
         el.style.animationDelay = (Math.random() * 8) + 's';
         el.style.fontSize = (14 + Math.random() * 18) + 'px';
-        hearts.appendChild(el);
+        container.appendChild(el);
       }
     }
 
-    spawnHearts();
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      resizeConfettiCanvas();
+    });
+
+    spawnShapes();
     resizeCanvas();
+    resizeConfettiCanvas();
   </script>
 </body>
 </html>
