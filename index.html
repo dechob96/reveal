@@ -158,6 +158,8 @@
     let drawing = false;
     let lastPoint = null;
     let revealed = false;
+    let scratchMoves = 0;
+    let totalScratchDistance = 0;
     const surpriseText = document.getElementById('surpriseText');
     let confettiPieces = [];
     let confettiRunning = false;
@@ -172,7 +174,6 @@
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(ratio, ratio);
       paintCover(rect.width, rect.height);
-      updateProgress();
     }
 
     function resizeConfettiCanvas() {
@@ -230,6 +231,10 @@
       ctx.fill();
 
       if (lastPoint) {
+        const dx = x - lastPoint.x;
+        const dy = y - lastPoint.y;
+        totalScratchDistance += Math.hypot(dx, dy);
+
         ctx.lineWidth = 48;
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
@@ -239,6 +244,7 @@
         ctx.stroke();
       }
 
+      scratchMoves += 1;
       lastPoint = { x, y };
     }
 
@@ -248,7 +254,6 @@
       lastPoint = null;
       const { x, y } = getPoint(event);
       scratchAt(x, y);
-      updateProgress();
     }
 
     function moveScratch(event) {
@@ -265,6 +270,11 @@
     }
 
     function updateProgress() {
+      if (revealed) return;
+
+      const enoughInteraction = scratchMoves >= 12 && totalScratchDistance >= 320;
+      if (!enoughInteraction) return;
+
       const rect = shell.getBoundingClientRect();
       const width = Math.max(1, Math.floor(rect.width));
       const height = Math.max(1, Math.floor(rect.height));
@@ -282,13 +292,14 @@
 
       const percent = Math.round((transparent / sampled) * 100);
 
-      if (percent >= 65 && !revealed) {
+      if (percent >= 65) {
         revealAll();
       }
     }
 
     function revealAll() {
       revealed = true;
+      drawing = false;
       shell.classList.add('revealed');
       surpriseText.textContent = 'You’re going to be an aunt 👶';
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -359,6 +370,12 @@
     canvas.addEventListener('touchmove', moveScratch, { passive: false });
     window.addEventListener('touchend', endScratch);
 
+    function resetScratchMetrics() {
+      scratchMoves = 0;
+      totalScratchDistance = 0;
+      lastPoint = null;
+    }
+
     function spawnShapes() {
       const container = document.querySelector('.floating-shapes');
       const symbols = ['✨', '⭐', '🌼', '☀️'];
@@ -375,12 +392,16 @@
     }
 
     window.addEventListener('resize', () => {
+      if (!revealed) {
+        resetScratchMetrics();
+      }
       resizeCanvas();
       resizeConfettiCanvas();
     });
 
     spawnShapes();
-    resizeCanvas();
+    resetScratchMetrics();
+    resize
     resizeConfettiCanvas();
   </script>
 </body>
