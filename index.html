@@ -96,7 +96,7 @@
 
     .surprise h2 {
       margin: 0;
-      font-size: clamp(2rem, 5vw, 3.3rem);
+      font-size: clamp(1.6rem, 3.8vw, 2.6rem);
       line-height: 1.08;
       letter-spacing: -0.03em;
       text-wrap: balance;
@@ -140,7 +140,7 @@
       <div class="scratch-shell" id="scratchShell">
         <div class="surprise">
           <div class="surprise-inner">
-            <h2 id="surpriseText">Keep Scratching</h2>
+            <h2 id="surpriseText">Keep scratching!</h2>
           </div>
         </div>
         <canvas id="scratchCanvas"></canvas>
@@ -266,15 +266,23 @@
 
     function updateProgress() {
       const rect = shell.getBoundingClientRect();
-      const imageData = ctx.getImageData(0, 0, Math.floor(rect.width), Math.floor(rect.height)).data;
+      const width = Math.max(1, Math.floor(rect.width));
+      const height = Math.max(1, Math.floor(rect.height));
+      const imageData = ctx.getImageData(0, 0, width, height).data;
       let transparent = 0;
-      for (let i = 3; i < imageData.length; i += 4) {
-        if (imageData[i] < 128) transparent++;
-      }
-      const total = imageData.length / 4;
-      const percent = Math.round((transparent / total) * 100);
+      let sampled = 0;
 
-      if (percent >= 70 && !revealed) {
+      for (let y = 0; y < height; y += 2) {
+        for (let x = 0; x < width; x += 2) {
+          const i = (y * width + x) * 4 + 3;
+          if (imageData[i] < 128) transparent++;
+          sampled++;
+        }
+      }
+
+      const percent = Math.round((transparent / sampled) * 100);
+
+      if (percent >= 65 && !revealed) {
         revealAll();
       }
     }
